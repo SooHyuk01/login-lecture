@@ -8,15 +8,21 @@ class User {
     }
 
     login() {
-        // const { id, pw } = userStorage.getUsers("id", "pw");
-        const { id, pw } = UserStorage.getUserInfo(this.body.id);
+        const client = this.body;
+        const { id, pw } = UserStorage.getUserInfo(client.id);
         if(id) {
-            if(id === this.body.id && pw === this.body.pw) {
+            if(id === client.id && pw === client.pw) {
                 return { success : true };
             }
             return { success : false, msg : "incorrcect pw"};
         }
         return { success : false, msg : "id is not exist"};
+    }
+
+    register() {
+        const client = this.body;
+        const response = UserStorage.save(client);
+        return response;
     }
 }
 

@@ -3,17 +3,22 @@
 const id = document.querySelector("#id"),
     name = document.querySelector("#name"),
     pw = document.querySelector("#pw"),
-    confirmPw = document.querySelector("#confirm-pw")
+    confirmPw = document.querySelector("#confirm-pw"),
     registerBtn = document.querySelector("#button");
 
-registerBtn.addEventListener("click", register());
+registerBtn.addEventListener("click", register);
 
 function register() {
+    if(!id.value) {
+        return alert("Enter the ID");
+    }
+    if(pw.value !== confirmPw.value) {
+        return alert("incorrect pw !");
+    }
     const req = {
         id : id.value,
         name : name.value,
         pw : pw.value,
-        confirmPw : confirmPw.value,
     };
     fetch("/register", {
         method : "POST",
