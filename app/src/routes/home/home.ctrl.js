@@ -1,9 +1,6 @@
 "use strict";
 
-const users = {
-    id : ["js", "nodejs", "express"],
-    pw : ["1234", "1234", "123456"],
-};
+const UserStorage = require("../../models/UserStorage");
 
 const output = {
     rootController : (req, res) => {
@@ -17,18 +14,19 @@ const process = {
     login : (req, res) => {
         const id = req.body.id;
         const pw = req.body.pw;
-
-        if(users.id.includes(id)) {
-            const idx = users.id.indexOf(id);
-            if(users.pw[idx] === pw) {
-                return res.json({ success : true });
-            }
+    const users = UserStorage.getUsers("id", "pw");
+    const response = {};
+    if(users.id.includes(id)) {
+        const idx = users.id.indexOf(id);
+        if(users.pw[idx] === pw) {
+            response.success = true;
+            return res.json(response);
         }
-
-        return res.json({
-            success : false,
-            msg : "failed login",
-        });
+    }
+    
+    response.success = false;
+    response.msg = "failed login";
+    return res.json(response);
     }
 }
 module.exports = {
