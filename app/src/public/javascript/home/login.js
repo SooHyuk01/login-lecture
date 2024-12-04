@@ -1,11 +1,15 @@
 "user strict";
 
-console.log("Hello");
-console.log("Bye");
-console.log("Hello");
-console.log("Bye");
-console.log("Hello");
-console.log("Bye");
-console.log("Hello");
-console.log("Bye");
-console.log("Error");
+const id = document.querySelector("#id"); 
+const pw = document.querySelector("#pw");
+const loginButton = document.querySelector("button");
+
+loginButton.addEventListener("click", login);
+
+function login() {
+    const req = {
+        id : id.value,
+        pw : pw.value,
+    };
+    console.log(req);
+};
