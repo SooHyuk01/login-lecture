@@ -19,7 +19,7 @@ function login() {
         },
         body: JSON.stringify(req),
     })
-    .then((res => res.json()))
+    .then((res) => res.json())
     .then((res) => {
         if(res.success) {
             location.href = "/";
@@ -28,6 +28,6 @@ function login() {
         }
     })
     .catch((err) => {
-        console.error("로그인 중 에러 발생");
-    })
+        console.error("로그인 중 오류 발생");
+    }) 
 };
