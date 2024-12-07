@@ -5,9 +5,9 @@ class User {
     constructor(body) {
         this.body = body;
     }
-    login() {
+    async login() {
         const client = this.body;
-        const { pw, id } = UserStorage.getUserInfo(client.id);
+        const { pw, id } = await UserStorage.getUserInfo(client.id);
         
         if(id) {
             if(id === client.id && pw === client.pw) {
@@ -19,7 +19,8 @@ class User {
     }
     register() {
         const client = this.body;
-        UserStorage.save(client);
+        const response = UserStorage.save(client);
+        return response;
     }
 }
 
